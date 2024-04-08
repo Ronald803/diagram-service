@@ -4,6 +4,9 @@ const token = "abcdefgh"
 
 
 export async function getFoldersFilesFromParent(parentId){
+    if(parentId == ""){
+        parentId = "null"
+    }
     const getFolders = fetch(`${url}/folders/${parentId}`,{method: "get",headers:{'authorization':token}})
     const getFiles = fetch(`${url}/files/${parentId}`,{method: "get",headers:{'authorization':token}})
     return Promise.all([getFolders,getFiles])
