@@ -1,13 +1,14 @@
 import React from 'react'
 
-function Footer() {
+function Footer(props) {
+  const footerStyle = `${props.bgColor} text-white`
   return (
-    <footer class="bg-primary mt-2 text-white">
-      <div class="w-full p-4">
-        <span class="block text-lg text-center">BC.LT.DE.FS.04</span>
-        <hr class="my-4 border-white" />
-        <span class="block text-lg text-center">Full Stack - Bootcamp</span>
-        <span class="block text-lg text-center">JalaSoft</span>
+    <footer className={footerStyle}>
+      <div className="w-full p-4">
+        <span className="block text-lg text-center">BC.LT.DE.FS.04</span>
+        <hr className="my-4 border-white" />
+        <span className="block text-lg text-center">Full Stack - Bootcamp</span>
+        <span className="block text-lg text-center">JalaSoft</span>
       </div>
     </footer>
   )

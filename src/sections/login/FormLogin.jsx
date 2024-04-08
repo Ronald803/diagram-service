@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 //import axios form 'axios';
 
-const FormLogin = () => {
+const FormLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -17,9 +17,11 @@ const FormLogin = () => {
     setShowPassword(!showPassword);
   };
 
+  const secondaryStyle = `${props.secondary} px-10 py-20 rounded-3xl border-2 gray-200`;
+
   return (
     <>
-      <div className="bg-primary px-10 py-20 rounded-3xl border-2 gray-200">
+      <div className={secondaryStyle}>
         <form onSubmit={handleSubmit}>
           <h1 className="text-5xl font-semibold">Welcome back</h1>
           <p className="font-medium text-lg text-white mt-4">
@@ -67,13 +69,13 @@ const FormLogin = () => {
               <div>
                 <input type="checkbox" id="rememberMe" />
                 <label
-                  className="ml-2 font-medium text-base text-gray-400"
+                  className="ml-2 font-medium text-base text-white"
                   htmlFor="rememberMe"
                 >
                   Remember for 30 days
                 </label>
               </div>
-              <a href="/" className="font-medium text-base text-white">
+              <a href="/" className="font-medium text-base text-white font-bold">
                 Forgot password
               </a>
             </div>
@@ -93,7 +95,7 @@ const FormLogin = () => {
           </button>
         </div>
         <div className="mt-8 flex justify-center items-center">
-          <p className="font-medium text-base text-gray-400 font-bold">
+          <p className="font-medium text-base text-white font-bold">
             Do not have an account ?
           </p>
           <button className="font-medium text-base text-white ml-2 font-bold">

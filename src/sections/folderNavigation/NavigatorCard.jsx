@@ -31,7 +31,8 @@ function NavigatorCard(props) {
             getContent(child._id);
             setPath({folderNames: [...path.folderNames,child.name],folderIds:[...path.folderIds,child._id]})
         } else {
-            console.log("Render code")
+            props.setTextCode(childChoosen.content)
+            console.log("es un file");
         }
     }
     const backPath=()=>{
@@ -59,7 +60,7 @@ function NavigatorCard(props) {
             .catch(error=>{console.log(error)})
     }
   return (
-    <div className='flex flex-col h-5/6 border-4 border-primary rounded-lg m-2'>
+    <div className='flex flex-col h-full border-4 border-primary rounded-lg mx-2'>
         <div className='flex-none p-2 bg-secondary'>
             <div className='flex relative'>
                 <div className='w-3/12 pt-1 bg-gray-600 rounded-l-lg text-center'>

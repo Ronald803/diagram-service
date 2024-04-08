@@ -18,4 +18,22 @@ async function postPythonCode(pythonCode) {
   }
 }
 
-export { postPythonCode };
+async function getDiagramByFormatType(pythonCode, imageFormat) {
+  const apiResult = await fetch(`${URL}/api/diagram/export/${imageFormat}`, {
+    method: "post",
+    headers: [["Content-Type", "text/plain"]],
+    body: pythonCode,
+  });
+
+  if (apiResult.status == 200) {
+    const imageBlob = await apiResult.blob();
+    return { image: imageBlob };
+  } else {
+    return {
+      errorMessage:
+        "There was an error when trying to export the image diagram.",
+    };
+  }
+}
+
+export { postPythonCode, getDiagramByFormatType };
