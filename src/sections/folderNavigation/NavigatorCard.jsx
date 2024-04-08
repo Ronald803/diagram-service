@@ -68,7 +68,7 @@ function NavigatorCard(props) {
                 </div>
                 <div className='w-8/12 p-1 border-2 border-gray-600 bg-white'>MyDiagrams:/{path.folderNames.join("/")}</div>
                 <div className='w-1/12 rounded-r-lg bg-gray-600 text-center'>
-                    <button onClick={()=>{setNewFileMenu(!newFileMenu)}}><img className='w-8' src='./src/assets/new_folder.png'/></button>
+                    <button onClick={()=>{setNewFileMenu(!newFileMenu)}}><img className='w-8' src='https://cdn-icons-png.flaticon.com/512/3767/3767084.png'/></button>
                 </div>
                 {
                     newFileMenu
