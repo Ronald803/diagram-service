@@ -87,7 +87,7 @@ function NavigatorCard(props) {
             <div className='h-full p-2 flex flex-wrap'>
                 {
                     childrenOfFolder.map(child=>(
-                    <div key={child._id}>
+                    <div key={child.id}>
                         <button 
                             onClick={()=>{setChildChoosen(child)}} 
                             onDoubleClick={()=>{handleDoubleClic(child)}}
