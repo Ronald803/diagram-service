@@ -2,7 +2,9 @@ import { useState } from "react";
 import BodyComponent from "../sections/generator/BodyComponent";
 import Footer from "../sections/shared/Footer";
 import Navbar from "../sections/shared/Navbar";
-import AuthProvider  from "../modules/auth/hooks/auth-provider"
+import AuthProvider from "../modules/auth/hooks/auth-provider";
+import CodeEditorProvider from "../modules/codeEditor/context/CodeEditorProvider";
+import NodesProvider from "../modules/nodes/context/NodesProvider";
 
 const HomePage = () => {
   const [theme, setTheme] = useState("_dark");
@@ -34,12 +36,17 @@ const HomePage = () => {
             bgColor={color_}
             secondary={secondary}
           />
-          <BodyComponent theme={theme} secondary={secondary}/>
+          <CodeEditorProvider>
+            <NodesProvider>
+              <BodyComponent theme={theme} secondary={secondary} />
+            </NodesProvider>
+          </CodeEditorProvider>
+
           <Footer bgColor={color_} />
         </div>
       </AuthProvider>
     </>
   );
-}
+};
 
 export default HomePage;

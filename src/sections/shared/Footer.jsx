@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Footer(props) {
-  const footerStyle = `${props.bgColor} text-white mt-80`
+  const footerStyle = `${props.bgColor} text-white mt-80`;
   return (
     <footer className={footerStyle}>
       <div className="w-full p-4">
@@ -11,7 +11,7 @@ function Footer(props) {
         <span className="block text-lg text-center">JalaSoft</span>
       </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

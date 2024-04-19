@@ -6,6 +6,7 @@ import OptionsBar from "./OptionsBar";
 import NavigatorCard from "../folderNavigation/NavigatorCard";
 import "../../styles/GraphRenderError.css";
 import ShowDiagramError from "./ShowDiagramError";
+import NodesList from "../diagramIcons/NodesList";
 function BodyComponent(props) {
   const [textCode, setTextCode] = useState("");
   const [validCode, setValidCode] = useState(false);
@@ -21,7 +22,7 @@ function BodyComponent(props) {
         setValidCode(true);
         setErrorMessage(undefined);
       } else {
-        setValidCode(false)
+        setValidCode(false);
         setErrorMessage(data.errorMessage);
       }
     });
@@ -41,6 +42,7 @@ function BodyComponent(props) {
         toggleMyDiagramButton={toggleMyDiagramButton}
       />
       <div className="flex w-full px-10 py-5">
+        <NodesList></NodesList>
         <div className="w-1/2">
           <CodeEditor
             className="w-1/2"
@@ -50,8 +52,12 @@ function BodyComponent(props) {
             error={errorMessage}
           />
         </div>
-        <div className={`w-1/2 ${errorMessage && !openNavigationCard ? 'error-graph':''}`}>
-          {errorMessage && !openNavigationCard &&(
+        <div
+          className={`w-1/2 ${
+            errorMessage && !openNavigationCard ? "error-graph" : ""
+          }`}
+        >
+          {errorMessage && !openNavigationCard && (
             <ShowDiagramError errorText={errorMessage.possibleError} />
           )}
           {openNavigationCard == false ? (

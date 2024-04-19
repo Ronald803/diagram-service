@@ -3,7 +3,7 @@ import { useAuth } from "../hooks/auth-provider";
 
 const PrivateRoute = () => {
    const token = useAuth();
-   return !token ? <Navigate to="/login" /> : <Outlet />;
+   return !token.token ? <Navigate to="/login" /> : <Outlet />;
 };
 
 export default PrivateRoute;

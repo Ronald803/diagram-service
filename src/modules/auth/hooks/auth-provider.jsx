@@ -7,19 +7,31 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
-  const [token, setToken] = useState( localStorage.getItem("token") || "" );
+  const [token, setToken] = useState( localStorage.getItem("token") || sessionStorage.getItem("token") || "");
   const navigate = useNavigate();
 
   const logout = () => {
     setToken(""),
     localStorage.removeItem("token"),
+    sessionStorage.clear()
     navigate("/login")
   }
 
-  const login = async (email, password) => {
+  const login = async (email, password, remember) => {
     const token = await loginRequest(email,password);
+
+    if(token.errorMessage){
+      throw new Error(token.errorMessage);
+    }
+    
     setToken(token.token);
-    localStorage.setItem("token", token);
+
+    if(remember){
+      localStorage.setItem("token", token.token);
+    }else {
+      sessionStorage.setItem("token", token.token);
+    }
+
     navigate("/");
   }
 

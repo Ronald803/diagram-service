@@ -1,15 +1,18 @@
+import NodesButton from "../diagramIcons/NodesButton";
 import DownloadButton from "./DownloadButton";
 import ExportDiagramComponent from "./ExportDiagramComponent";
 
 export default function OptionsBar(props) {
   return (
     <menu className="flex justify-center p-2 border-b-2 border-primary">
-      <li className="content-center">
+      {/* <li className="content-center">
         <ExportDiagramComponent
           pythonCodeText={props.pythonCodeText}
           imageRef={props.imageRef}
         />
-      </li>
+      </li> */}
+
+      <NodesButton></NodesButton>
       <li className="">
         <DownloadButton
           enableButton={props.validCode}

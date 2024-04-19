@@ -1,30 +1,23 @@
 import React, { useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { white } from "tailwindcss/colors";
-import LoginCard from "../login/LoginCard";
 import { useAuth } from "../../modules/auth/hooks/auth-provider";
+import { useNavigate } from "react-router-dom";
 
 function Navbar(props) {
   const auth = useAuth();
   const [loggedIn, setLoggedIn] = useState(auth ? true : false);
-  const [hideLoginCard, setHideLoginCard] = useState("hidden");
+  const navigate = useNavigate();
 
-  
-  
-  
-  const openLoginCard = () => {
-    if (hideLoginCard == "hidden") {
-      setHideLoginCard("");
-    } else {
-      setHideLoginCard("hidden");
-    }
+  const redirectToLogin = () => {
+    navigate('/login');
   };
 
   const logOut = () => {
     auth.logout();
   };
 
-  const navStyle = `${props.bgColor} text-white border-gray-200 p-3`
+  const navStyle = `${props.bgColor} text-white border-gray-200 p-3`;
 
   return (
     <div className="text-white relative">
@@ -32,7 +25,7 @@ function Navbar(props) {
         <div className="flex flex-wrap items-center justify-between mx-auto">
           <div className="items-center w-1/2 flex justify-start">
             <div className="pl-2">
-              <img className="w-10" src="./src/assets/logo.png"/>
+              <img className="w-10" src="./src/assets/logo.png" />
             </div>
             <span className="text-3xl font-semibold pl-2">
               Diagram Generator
@@ -52,7 +45,7 @@ function Navbar(props) {
               {loggedIn == false ? (
                 <li className="self-end">
                   <button
-                    onClick={openLoginCard}
+                    onClick={redirectToLogin}
                     className="text-2xl hover:text-black "
                   >
                     Login
@@ -64,7 +57,7 @@ function Navbar(props) {
                     onClick={logOut}
                     className="text-2xl hover:text-black "
                   >
-                    Cerrar Sesión
+                    Log out
                   </button>
                 </li>
               )}
@@ -72,11 +65,6 @@ function Navbar(props) {
           </div>
         </div>
       </nav>
-      <div className={hideLoginCard}>
-        <div className="fixed right-0 z-50">
-          <LoginCard secondary={props.secondary}/>
-        </div>
-      </div>
     </div>
   );
 }
