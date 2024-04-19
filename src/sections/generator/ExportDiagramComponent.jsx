@@ -5,13 +5,17 @@ export default function ExportDiagramComponent(props) {
     getDiagramByFormatType(props.pythonCodeText, imgFormat).then((data) => {
       if (!data.errorMessage) {
         let blob = null;
-        if (imgFormat == "svg") {
-          blob = new Blob([data.image], { type: "image/svg+xml" });
-        } else {
-          blob = new Blob([data.image], { type: "image/png" });
+        switch (imgFormat) {
+          case "png": {
+            blob = new Blob([data.image], { type: "image/png" });
+            break;
+          }
+          case "jpg": {
+            blob = new Blob([data.image], { type: "image/jpg" });
+            break;
+          }
         }
         props.imageRef.current.setAttribute("src", URL.createObjectURL(blob));
-        console.log(blob);
       } else {
         console.log("There was an error...");
       }
@@ -19,13 +23,19 @@ export default function ExportDiagramComponent(props) {
   }
 
   return (
-    <select className="px-4 border rounded-md">
-      <option value="svg" onClick={() => exportDiagram("svg")}>
-        Export To SVG
-      </option>
-      <option value="png" onClick={() => exportDiagram("png")}>
-        Export To PNG
-      </option>
-    </select>
+    <div className="flex gap-2 flex-row flex-nowrap">
+      <button
+        className="py-1 px-3 border rounded-xl bg-[#e5e7eb] hover:text-white hover:bg-primary dark:text-white"
+        onClick={() => exportDiagram("png")}
+      >
+        Export to PNG
+      </button>
+      <button
+        className="py-1 px-3 border rounded-xl bg-[#e5e7eb] hover:text-white hover:bg-primary dark:text-white"
+        onClick={() => exportDiagram("jpg")}
+      >
+        Export to JPG
+      </button>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
-const URL = "http://localhost:3000";
+const URL = "http://localhost:8000";
 
 async function postPythonCode(pythonCode) {
-  const apiResult = await fetch(`${URL}/api/diagram`, {
+  const apiResult = await fetch(`${URL}/diagram`, {
     method: "post",
     headers: [["Content-Type", "text/plain"]],
     body: pythonCode,
@@ -11,7 +11,7 @@ async function postPythonCode(pythonCode) {
     return { image: imageBlob };
   } else if (apiResult.status == 400) {
     const jsonData = await apiResult.json();
-    return { errorMessage: jsonData.errorMessage };
+    return { errorMessage: jsonData };
   } else {
     const jsonData = await apiResult.json();
     return { errorMessage: jsonData.errorMessage };
@@ -19,7 +19,7 @@ async function postPythonCode(pythonCode) {
 }
 
 async function getDiagramByFormatType(pythonCode, imageFormat) {
-  const apiResult = await fetch(`${URL}/api/diagram/export/${imageFormat}`, {
+  const apiResult = await fetch(`${URL}/diagram-format/${imageFormat}`, {
     method: "post",
     headers: [["Content-Type", "text/plain"]],
     body: pythonCode,

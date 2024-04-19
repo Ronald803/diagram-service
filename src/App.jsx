@@ -1,42 +1,25 @@
-import React, { useState } from "react";
-import BodyComponent from "./sections/generator/BodyComponent";
-import Footer from "./sections/shared/Footer";
-import Navbar from "./sections/shared/Navbar";
+import HomePage from "./pages/HomePage"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import LoginPage from "./pages/LoginPage";
+import  PrivateRoute  from "./modules/auth/guard/authGuard";
+import AuthProvider from "./modules/auth/hooks/auth-provider"
 
-function App() {
-  const [theme, setTheme] = useState("_dark");
-  const [isDarkMode, setDarkMode] = useState(false);
-  const [color, setColor] = useState("");
-  const [color_, setColor_] = useState("bg-primary");
-  const [secondary, setSecondary] = useState("");
 
-  const toggleDarkMode = (checked) => {
-    setDarkMode(checked);
-    isDarkMode
-      ? setColor("bg-darkTheme") ||
-        setTheme("dracula") ||
-        setColor_("bg-darkAux") ||
-        setSecondary("bg-secondary")
-      : setColor("bg-defaultTheme") ||
-        setTheme("github") ||
-        setColor_("bg-primary") ||
-        setSecondary("bg-primary");
-  };
+function App(){
 
-  return (
-    <>
-      <div className={color}>
-        <Navbar
-          isDarkMode={isDarkMode}
-          toggleDarkMode={toggleDarkMode}
-          bgColor={color_}
-          secondary={secondary}
-        />
-        <BodyComponent theme={theme} secondary={secondary}/>
-        <Footer bgColor={color_} />
-      </div>
-    </>
-  );
+  return(
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={ <HomePage/> }/>
+          </Route>
+          <Route path="/login" element={ <LoginPage/>}/>
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
+
+  )
 }
 
 export default App;

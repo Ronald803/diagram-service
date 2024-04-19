@@ -1,0 +1,8 @@
+.replacement-marker-light {
+    position: absolute;
+    background-color: #ff110083;
+ }
+ .replacement-marker-dark {
+    position: absolute;
+    background-color: #c9ad11cc;
+ }

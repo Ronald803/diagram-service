@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Footer(props) {
-  const footerStyle = `${props.bgColor} text-white`
+  const footerStyle = `${props.bgColor} text-white mt-80`
   return (
     <footer className={footerStyle}>
       <div className="w-full p-4">
