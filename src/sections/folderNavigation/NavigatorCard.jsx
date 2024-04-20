@@ -46,7 +46,6 @@ function NavigatorCard(props) {
       });
     } else {
       updateCodeEditorText(childChoosen.content);
-      console.log("es un file");
     }
   };
   const backPath = () => {
@@ -95,7 +94,7 @@ function NavigatorCard(props) {
                 setNewFileMenu(!newFileMenu);
               }}
             >
-              <img className="w-8" src="./src/assets/new_folder.png" />
+              <img className="w-8" src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png" />
             </button>
           </div>
           {newFileMenu && (
