@@ -7,12 +7,19 @@ import NavigatorCard from "../folderNavigation/NavigatorCard";
 import "../../styles/GraphRenderError.css";
 import ShowDiagramError from "./ShowDiagramError";
 import NodesList from "../diagramIcons/NodesList";
+import {
+  getFoldersFilesFromParent, getDataFromFile,
+  postDataContent
+} from "../../modules/storage/db/NavigationRequests";
+import { getFoldersFilesGoogle, getDataFromFileGoogle, postDataContentGoogle } from "../../modules/storage/google/googleNavigationRequests";
+
 function BodyComponent(props) {
   const [textCode, setTextCode] = useState("");
   const [validCode, setValidCode] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [openNavigationCard, setOpenNavigationCard] = useState(true);
+  const [storage, setStorage] = useState('mongo');
   const imageRef = useRef(null);
   useEffect(() => {
     postPythonCode(textCode).then((data) => {
@@ -30,6 +37,30 @@ function BodyComponent(props) {
   const toggleMyDiagramButton = () => {
     setOpenNavigationCard(!openNavigationCard);
   };
+
+  const fileSources = {
+    mongo: {
+      getFoldersFilesFromParent,
+      getDataFromFile,
+      postDataContent
+    },
+    google: {
+      getFoldersFilesFromParent: getFoldersFilesGoogle,
+      getDataFromFile: getDataFromFileGoogle,
+      postDataContent: postDataContentGoogle
+    }
+  }
+
+  const getData = (from) => {
+    console.log('getdata', from)
+    return fileSources[from]
+  }
+
+  const handleSelectStorage = (event) => {
+    console.log(event.target.value);
+    setStorage(event.target.value);
+  };
+
   return (
     <>
       <OptionsBar
@@ -40,6 +71,8 @@ function BodyComponent(props) {
         textCode={textCode}
         secondary={props.secondary}
         toggleMyDiagramButton={toggleMyDiagramButton}
+        selectStorage={handleSelectStorage}
+        storage={storage}
       />
       <div className="flex w-full px-10 py-5">
         <NodesList></NodesList>
@@ -53,9 +86,8 @@ function BodyComponent(props) {
           />
         </div>
         <div
-          className={`w-1/2 ${
-            errorMessage && !openNavigationCard ? "error-graph" : ""
-          }`}
+          className={`w-1/2 ${errorMessage && !openNavigationCard ? "error-graph" : ""
+            }`}
         >
           {errorMessage && !openNavigationCard && (
             <ShowDiagramError errorText={errorMessage.possibleError} />
@@ -72,6 +104,8 @@ function BodyComponent(props) {
             <NavigatorCard
               dataFromEditor={textCode}
               setTextCode={setTextCode}
+              dataSource={getData(storage)}
+              storage={storage}
             />
           )}
         </div>

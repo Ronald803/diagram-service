@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { CodeEditorContext } from "../../modules/codeEditor/context/CodeEditorContext";
 import FileItem from "./FileItem";
-import {
-  getFoldersFilesFromParent,
-  postDataContent,
-} from "./NavigationRequests";
 import CreateNewFolderForm from "./CreateNewFolderForm";
 
 function NavigatorCard(props) {
@@ -16,9 +12,9 @@ function NavigatorCard(props) {
   const [childChoosen, setChildChoosen] = useState({});
   useEffect(() => {
     getContent("");
-  }, []);
+  }, [props.storage]);
   const getContent = (parentId) => {
-    getFoldersFilesFromParent(parentId)
+    props.dataSource.getFoldersFilesFromParent(parentId)
       .then(async (foldersAndFiles) => {
         let folders = await foldersAndFiles[0].json();
         let files = await foldersAndFiles[1].json();
@@ -31,10 +27,10 @@ function NavigatorCard(props) {
         });
         setChildrenOfFolder(content);
         setChildChoosen({});
-        console.log(content);
+        console.log('getContent: ', content);
       })
       .catch((error) => {
-        console.log(error);
+        console.log('getContent: ', error);
       });
   };
   const handleDoubleClic = (child) => {
@@ -45,7 +41,7 @@ function NavigatorCard(props) {
         folderIds: [...path.folderIds, child._id],
       });
     } else {
-      updateCodeEditorText(childChoosen.content);
+      props.dataSource.getDataFromFile(childChoosen).then((content) => updateCodeEditorText(content));
       console.log("es un file");
     }
   };
@@ -67,7 +63,9 @@ function NavigatorCard(props) {
       content: props.dataFromEditor,
       parentFolderId: path.folderIds[path.folderIds.length - 1],
     };
-    postDataContent(newFile, "file")
+    console.log(newFile)
+    console.log(path.folderIds)
+    props.dataSource.postDataContent(newFile, "file")
       .then((answer) => {
         path.folderIds.length < 1
           ? getContent("")
@@ -95,7 +93,7 @@ function NavigatorCard(props) {
                 setNewFileMenu(!newFileMenu);
               }}
             >
-              <img className="w-8" src="./src/assets/new_folder.png" />
+              <img className="w-8" src="https://cdn-icons-png.flaticon.com/512/3767/3767084" />
             </button>
           </div>
           {newFileMenu && (
@@ -104,6 +102,7 @@ function NavigatorCard(props) {
                 parentId={path.folderIds[path.folderIds.length - 1]}
                 getContent={getContent}
                 setNewFileMenu={setNewFileMenu}
+                postDataContent={props.dataSource.postDataContent}
               />
             </div>
           )}
