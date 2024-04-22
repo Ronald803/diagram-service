@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const url = "http://localhost:8000/nodes";
+const url = "http://localhost:3000/api/diagram/icons/nodes";
 
 export function useGetNodes() {
   const [nodes, setNodes] = useState(null);

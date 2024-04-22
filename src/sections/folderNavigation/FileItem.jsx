@@ -4,12 +4,10 @@ function FileItem(props) {
     let fileImage = ""
     switch (props.itemType) {
         case "folder":
-            //fileImage = "./src/assets/folder_image.png"
-            fileImage = 'https://cdn-icons-png.flaticon.com/512/3767/3767084.png'
+            fileImage = "./src/assets/folder_image.png"
             break;
         case "file":
-            //fileImage = "./src/assets/png_image.png"
-            fileImage = 'https://cdn-icons-png.freepik.com/512/8422/8422275.png'
+            fileImage = "./src/assets/png_image.png"
             break;
         case "svg":
             fileImage = "./src/assets/svg_image.png"

@@ -25,7 +25,7 @@ function Navbar(props) {
         <div className="flex flex-wrap items-center justify-between mx-auto">
           <div className="items-center w-1/2 flex justify-start">
             <div className="pl-2">
-              <img className="w-10" src="https://cdn.discordapp.com/attachments/1125580906023899329/1226996283600933005/image.png?ex=6626cc56&is=66145756&hm=9f7ffea51d4e30e53f56a4eb0af801cccd540aa50fbdc8c700fda76408c66ff3&" />
+              <img className="w-10" src="./src/assets/logo.png" />
             </div>
             <span className="text-3xl font-semibold pl-2">
               Diagram Generator

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-const url = "http://localhost:8000/nodes";
+const url = "http://localhost:3000/api/diagram/icons/nodes";
 // const mockNodeContent = [
 //   { category: "aggregator", content: ["Fluentd", "Vector"] },
 //   { category: "analytics", content: ["Beam", "Databricks", "Dbt"] },
